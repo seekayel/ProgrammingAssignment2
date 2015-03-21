@@ -1,8 +1,15 @@
-## Put comments here that give an overall description of what your
-## functions do
+## CacheMatrix is a package that enables you to cache calculations on a matrix
+## which could be expensive to compute. Currently "solve" aka calculating the
+## inverse is the only supported function.
+## Functions:
+##   makeCacheMatrix - creates the object that hold the matrix and inverse.
+##   cacheSolve - access function to return cached value or calculate it.
 
-## Write a short comment describing this function
 
+## makeCacheMatrix: Takes an matrix (optional) and stores it internally. Get and
+## set functions are available for the matrix. getinverse & setinverse serve as
+## access functions to the cached value of solve(X). Modifications of x will
+## reset the cached inverse value.
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
     set <- function(y) {
@@ -18,8 +25,9 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
-
+## cacheSolve - takes a cacheMatrix, additional arguements are passed directly
+## into the solve function if it is called. This function either returns the
+## cached value inside of x or computes it, sets it and returns it.
 cacheSolve <- function(x, ...) {
     inv <- x$getinverse()
     if(!is.null(inv)) {
